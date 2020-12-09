@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/pexels1"
+    android:backgroundTint="#B5000000"
+    android:backgroundTintMode="src_over"
+    tools:context=".Authentication.LoginFragment">
+
+        <ImageView
+            android:id="@+id/ic_back_login"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_arrowback"
+            app:tint="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.103" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/cardholder"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="75dp"
+                android:fontFamily="@font/roboto_light"
+                android:text="Welcome Back !"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/ed_email_login"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="25dp"
+                android:background="@drawable/customauthinput"
+                android:drawableStart="@drawable/ic_email_draw"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:fontFamily="@font/roboto_light"
+                android:hint="Email Address"
+                android:inputType="textPersonName"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <EditText
+                android:id="@+id/ed_password_login"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/customauthinput"
+                android:drawableStart="@drawable/ic_lock_draw"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:fontFamily="@font/roboto_light"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:layout_constraintEnd_toEndOf="@+id/ed_email_login"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/ed_email_login"
+                app:layout_constraintTop_toBottomOf="@+id/ed_email_login" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Remember Me ?"
+                android:fontFamily="@font/roboto_light"
+                app:layout_constraintStart_toStartOf="@+id/ed_password_login"
+                app:layout_constraintTop_toBottomOf="@+id/ed_password_login" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_remember_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/ed_password_login"
+                app:layout_constraintTop_toBottomOf="@+id/ed_password_login"
+                android:theme="@style/SCBSwitch"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_login_login"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/customsimplebutton"
+                android:fontFamily="@font/roboto_light"
+                android:text="LOG IN"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/ed_password_login"
+                app:layout_constraintStart_toStartOf="@+id/ed_password_login"
+                app:layout_constraintTop_toBottomOf="@+id/sw_remember_login" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
