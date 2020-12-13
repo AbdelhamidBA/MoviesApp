@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "1079485732554",
+    "firebase_url": "https://wide-isotope-296908-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "wide-isotope-296908",
+    "storage_bucket": "wide-isotope-296908.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1079485732554:android:dc7e47f32b9e6eccea8633",
+        "android_client_info": {
+          "package_name": "com.example.MovieTicketProject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1079485732554-s07e8jvaa7fl497rc59tslvsvh2418rh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUHbHFO8e6kj3wr8JWGQnwhf-mo4JkqV4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1079485732554-s07e8jvaa7fl497rc59tslvsvh2418rh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1079485732554:android:e253bdfedcfbc613ea8633",
+        "android_client_info": {
+          "package_name": "com.example.movieticketproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1079485732554-s07e8jvaa7fl497rc59tslvsvh2418rh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUHbHFO8e6kj3wr8JWGQnwhf-mo4JkqV4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1079485732554-s07e8jvaa7fl497rc59tslvsvh2418rh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1079485732554:android:48b7286971ad5229ea8633",
+        "android_client_info": {
+          "package_name": "com.example.profilemanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1079485732554-s07e8jvaa7fl497rc59tslvsvh2418rh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUHbHFO8e6kj3wr8JWGQnwhf-mo4JkqV4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1079485732554-s07e8jvaa7fl497rc59tslvsvh2418rh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
