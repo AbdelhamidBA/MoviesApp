@@ -16,6 +16,7 @@ import com.example.movieticketproject.R;
 
 public class SplashScreen extends Fragment {
     Button signInBTN,signUpBTN;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -30,6 +31,17 @@ public class SplashScreen extends Fragment {
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left);
                 fragmentTransaction.replace(R.id.mainfragement,MainActivity.loginFragment);
+                fragmentTransaction.commit();
+
+            }
+        });
+
+        signUpBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.anim.enter_from_right,R.anim.exit_to_left);
+                fragmentTransaction.replace(R.id.mainfragement,MainActivity.signupFragment);
                 fragmentTransaction.commit();
             }
         });

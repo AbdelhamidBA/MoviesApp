@@ -16,13 +16,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Switch;
 
 import com.example.movieticketproject.HomeActivity;
 import com.example.movieticketproject.MainActivity;
 import com.example.movieticketproject.Models.Users;
 import com.example.movieticketproject.R;
-import com.example.movieticketproject.SplashScreen;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -48,10 +46,10 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_login, container, false);
         emailED = v.findViewById(R.id.ed_email_login);
-        passED = v.findViewById(R.id.ed_password_login);
+        passED = v.findViewById(R.id.ed_password_signup);
         loginBTN = v.findViewById(R.id.btn_login_login);
         rememberme = v.findViewById(R.id.sw_remember_login);
-        back = v.findViewById(R.id.ic_back_login);
+        back = v.findViewById(R.id.ic_back_signup);
         reference = FirebaseDatabase.getInstance().getReference().child("Users");
         email = emailED.getText().toString();
         password = passED.getText().toString();
@@ -91,7 +89,6 @@ public class LoginFragment extends Fragment {
                                     SharedPreferences.Editor editor = pref.edit();
                                     editor.putString("fullname",currentUser.getFullname());
                                     editor.putString("email",currentUser.getEmail());
-                                    editor.putString("role",currentUser.getRole());
                                     editor.commit();
                                     if(currentUser.getRole() == "client")
                                     {

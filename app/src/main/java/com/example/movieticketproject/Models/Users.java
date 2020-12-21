@@ -5,7 +5,7 @@ public class Users {
     String birthdate;
     String email;
     String password;
-    String avatarPic;
+    //String avatarPic;
     String role;
 
     public Users() {
@@ -41,14 +41,6 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getAvatarPic() {
-        return avatarPic;
-    }
-
-    public void setAvatarPic(String avatarPic) {
-        this.avatarPic = avatarPic;
     }
 
     public String getRole() {

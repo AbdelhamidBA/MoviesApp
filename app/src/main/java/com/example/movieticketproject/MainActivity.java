@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.movieticketproject.Authentication.LoginFragment;
+import com.example.movieticketproject.Authentication.SignupFragment;
 
 public class MainActivity extends AppCompatActivity {
     public static SplashScreen splashScreen;
     public static LoginFragment loginFragment;
+    public static SignupFragment signupFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         splashScreen = new SplashScreen();
         loginFragment = new LoginFragment();
+        signupFragment = new SignupFragment();
         fragmentManager.beginTransaction().add(R.id.mainfragement,splashScreen).commit();
     }
 }
