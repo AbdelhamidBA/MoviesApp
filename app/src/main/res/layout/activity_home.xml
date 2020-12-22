@@ -6,4 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+    <LinearLayout
+        android:id="@+id/home_main_fragment"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/smoothBottomBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
+
+    <me.ibrahimsn.lib.SmoothBottomBar
+        android:id="@+id/smoothBottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        app:backgroundColor="#20203E"
+        app:iconSize="20dp"
+        app:iconTint="@color/white"
+        app:iconTintActive="@color/gold"
+        app:indicatorRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/homemenu"
+        app:textColor="@color/gold"
+        app:textSize="15sp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

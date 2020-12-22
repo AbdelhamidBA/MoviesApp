@@ -51,8 +51,6 @@ public class LoginFragment extends Fragment {
         rememberme = v.findViewById(R.id.sw_remember_login);
         back = v.findViewById(R.id.ic_back_signup);
         reference = FirebaseDatabase.getInstance().getReference().child("Users");
-        email = emailED.getText().toString();
-        password = passED.getText().toString();
         pref = getActivity().getSharedPreferences("current_user", Context.MODE_PRIVATE);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +64,8 @@ public class LoginFragment extends Fragment {
         loginBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                email = emailED.getText().toString();
+                password = passED.getText().toString();
                 if(emailED.getText().toString().equals("") || !isEmailValid(emailED.getText().toString()))
                 {
                     emailED.setError("Enter a valid Email");
@@ -82,15 +82,18 @@ public class LoginFragment extends Fragment {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if(snapshot.exists())
                             {
-                                String passwordDB = snapshot.child(email).child("password").getValue(String.class);
+                                DataSnapshot data = snapshot.getChildren().iterator().next();
+                                System.out.println(data.child("password").getValue(String.class));
+                                String passwordDB = data.child("password").getValue(String.class);
                                 if(passwordDB.equals(password))
                                 {
-                                    Users currentUser = snapshot.child(email).getValue(Users.class);
+                                    Users currentUser = data.getValue(Users.class);
+                                    System.out.println(currentUser);
                                     SharedPreferences.Editor editor = pref.edit();
                                     editor.putString("fullname",currentUser.getFullname());
                                     editor.putString("email",currentUser.getEmail());
                                     editor.commit();
-                                    if(currentUser.getRole() == "client")
+                                    if(currentUser.getRole().equals("client"))
                                     {
                                         Intent intent = new Intent(LoginFragment.this.getActivity(), HomeActivity.class);
                                         getActivity().startActivity(intent);
