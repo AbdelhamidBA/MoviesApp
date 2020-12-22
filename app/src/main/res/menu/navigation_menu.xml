@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuProfile"
+        android:title="Profile">
+    </item>
+
+    <item
+        android:id="@+id/menuNotofication"
+        android:title="Notofication">
+    </item>
+
+    <item
+        android:id="@+id/menuCollectio"
+        android:title="Profile">
+    </item>
+
+    <item
+        android:title="Others">
+        <menu>
+            <item
+                android:id="@+id/menuSettings"
+                android:title="Settings">
+            </item>
+
+            <item
+                android:id="@+id/menuSupport"
+                android:title="Support">
+            </item>
+        </menu>
+    </item>
+
+</menu>
