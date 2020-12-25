@@ -1,6 +1,7 @@
 package com.example.movieticketproject.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +14,14 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.movieticketproject.Models.Film;
+import com.example.movieticketproject.Models.Retrofit.Movie.MovieAPI;
+import com.example.movieticketproject.MovieDetails;
 import com.example.movieticketproject.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class FilmRecyclerAdpater extends RecyclerView.Adapter<ViewHolder> {
+public class FilmRecyclerAdpater extends RecyclerView.Adapter<FilmRecyclerAdpater.ViewHolder> {
 
     Context context;
     ArrayList<Film> films ;
@@ -50,18 +53,29 @@ public class FilmRecyclerAdpater extends RecyclerView.Adapter<ViewHolder> {
     public int getItemCount() {
         return films.size();
     }
+
+    class ViewHolder extends RecyclerView.ViewHolder{
+
+        ImageView thumbnail,infoButton;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            thumbnail = itemView.findViewById(R.id.film_thumbnail);
+            thumbnail.setColorFilter(Color.argb(1,0,0,0));
+            infoButton = itemView.findViewById(R.id.infobutton);
+
+            infoButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, MovieDetails.class);
+                    intent.putExtra("idMovie","475557");
+                    context.startActivity(intent);
+                }
+            });
+
+
+        }
 }
 
-class ViewHolder extends RecyclerView.ViewHolder{
 
-    ImageView thumbnail,infoButton;
-
-    public ViewHolder(@NonNull View itemView) {
-        super(itemView);
-        thumbnail = itemView.findViewById(R.id.film_thumbnail);
-        thumbnail.setColorFilter(Color.argb(1,0,0,0));
-        infoButton = itemView.findViewById(R.id.infobutton);
-
-
-    }
 }
