@@ -7,9 +7,12 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -21,6 +24,7 @@ import com.example.movieticketproject.HomeDashborad.HomeFragment;
 import com.example.movieticketproject.HomeDashborad.LocationFragment;
 import com.example.movieticketproject.Models.Cinema;
 import com.example.movieticketproject.Models.Film;
+import com.example.movieticketproject.Services.Credentials;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,6 +36,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import me.ibrahimsn.lib.OnItemSelectedListener;
 import me.ibrahimsn.lib.SmoothBottomBar;
@@ -44,9 +49,8 @@ public class HomeActivity extends AppCompatActivity {
     public static ArrayList<Film> films = new ArrayList<Film>();
     private boolean permission_location = false;
     DatabaseReference reference = null;
-    Fragment fragment = null;
     float closetDistance = 0;
-    SmoothBottomBar navBar;
+    public static SmoothBottomBar navBar;
     private double myLat,myLong;
     /*
 
@@ -86,12 +90,6 @@ public class HomeActivity extends AppCompatActivity {
         decorView.setSystemUiVisibility(flags);
         FragmentManager fragmentManager = getSupportFragmentManager();
         reference=FirebaseDatabase.getInstance().getReference().child("Films");
-        Film f = new Film();
-        f.setId("330457");
-        f.setName("Frozen II");
-        f.setPrice("100");
-        f.setShowdatetime("21/01/2021 14:00");
-        //reference.push().setValue(f);
         homeFragment = new HomeFragment();
         locationFragment = new LocationFragment();
         historyFragment = new HistoryFragment();
@@ -127,7 +125,7 @@ public class HomeActivity extends AppCompatActivity {
         FusedLocationProviderClient mClient = LocationServices.getFusedLocationProviderClient(this.getApplicationContext());
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-            return;
+            return ;
         }
         mClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
             @Override
@@ -183,7 +181,9 @@ public class HomeActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+
         });
+
     }
 
     /*
@@ -235,4 +235,5 @@ public class HomeActivity extends AppCompatActivity {
             }
         }
     }
+
 }

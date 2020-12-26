@@ -45,6 +45,14 @@ public class FilmRecyclerAdpater extends RecyclerView.Adapter<FilmRecyclerAdpate
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         System.out.println("Position:"+position);
         Picasso.with(context).load(films.get(position).getThumbnail()).resize(150,250).centerCrop().into(holder.thumbnail);
+        holder.infoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MovieDetails.class);
+                intent.putExtra("idMovie",films.get(position).getId());
+                context.startActivity(intent);
+            }
+        });
 
 
     }
@@ -64,14 +72,7 @@ public class FilmRecyclerAdpater extends RecyclerView.Adapter<FilmRecyclerAdpate
             thumbnail.setColorFilter(Color.argb(1,0,0,0));
             infoButton = itemView.findViewById(R.id.infobutton);
 
-            infoButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, MovieDetails.class);
-                    intent.putExtra("idMovie","475557");
-                    context.startActivity(intent);
-                }
-            });
+
 
 
         }

@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.movieticketproject.Models.DataAdpater.TicketData;
 import com.example.movieticketproject.Models.Film;
 import com.example.movieticketproject.Models.SoldTicket;
 import com.example.movieticketproject.R;
@@ -24,9 +25,9 @@ import java.util.ArrayList;
 public class TicketRecyclerAdpater extends RecyclerView.Adapter<TicketViewHolder> {
 
     Context context;
-    ArrayList<SoldTicket> tickets ;
+    ArrayList<TicketData> tickets ;
 
-    public TicketRecyclerAdpater(Context context,ArrayList<SoldTicket> tickets)
+    public TicketRecyclerAdpater(Context context,ArrayList<TicketData> tickets)
     {
         this.context = context;
         this.tickets = tickets;

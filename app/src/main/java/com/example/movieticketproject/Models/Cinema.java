@@ -1,6 +1,8 @@
 package com.example.movieticketproject.Models;
 
-public class Cinema {
+import java.io.Serializable;
+
+public class Cinema implements Serializable {
     private String id;
     private String name;
     private String address;
@@ -48,5 +50,10 @@ public class Cinema {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 }
