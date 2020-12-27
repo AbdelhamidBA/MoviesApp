@@ -20,6 +20,8 @@ import android.widget.ImageView;
 import com.example.movieticketproject.HomeActivity;
 import com.example.movieticketproject.MainActivity;
 import com.example.movieticketproject.Models.Users;
+import com.example.movieticketproject.Profiles.ClientProfile;
+import com.example.movieticketproject.Profiles.ProfileFragment;
 import com.example.movieticketproject.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -95,7 +97,7 @@ public class LoginFragment extends Fragment {
                                     editor.commit();
                                     if(currentUser.getRole().equals("client"))
                                     {
-                                        Intent intent = new Intent(LoginFragment.this.getActivity(), HomeActivity.class);
+                                        Intent intent = new Intent(LoginFragment.this.getActivity(), ClientProfile.class);
                                         getActivity().startActivity(intent);
                                         getActivity().finishActivity(0);
                                     }

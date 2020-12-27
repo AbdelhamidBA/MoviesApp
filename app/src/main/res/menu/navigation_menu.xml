@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item
+        android:id="@+id/menuHome"
+        android:icon="@drawable/ic_home"
+        android:iconTint="@color/black"
+        android:title="Home"
+        >
+    </item>
+
+    <item
+        android:id="@+id/menuHistory"
+        android:icon="@drawable/ic_history"
+        android:iconTint="@color/black"
+        android:title="History">
+    </item>
+
+    <item
+        android:id="@+id/menuLocation"
+        android:icon="@drawable/ic_location"
+        android:iconTint="@color/black"
+        android:title="Location">
+    </item>
     <item
         android:id="@+id/menuProfile"
-        android:title="Profile">
-    </item>
-
-    <item
-        android:id="@+id/menuNotofication"
-        android:title="Notofication">
-    </item>
-
-    <item
-        android:id="@+id/menuCollectio"
+        android:icon="@drawable/ic_person"
+        android:iconTint="@color/black"
         android:title="Profile">
     </item>
 
@@ -21,12 +35,16 @@
         <menu>
             <item
                 android:id="@+id/menuSettings"
+                android:icon="@drawable/ic_settings"
+                android:iconTint="@color/black"
                 android:title="Settings">
             </item>
 
             <item
-                android:id="@+id/menuSupport"
-                android:title="Support">
+                android:id="@+id/menuLogout"
+                android:icon="@drawable/ic_login"
+                android:iconTint="@color/black"
+                android:title="Log out">
             </item>
         </menu>
     </item>
