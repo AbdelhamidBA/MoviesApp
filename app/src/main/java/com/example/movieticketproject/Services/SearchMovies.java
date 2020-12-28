@@ -4,7 +4,12 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.movieticketproject.Adapters.FilmRecyclerAdpater;
 import com.example.movieticketproject.Models.Film;
+import com.example.movieticketproject.Profiles.AddFilm;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,11 +32,13 @@ public class SearchMovies extends AsyncTask {
     static String json = "";
     ArrayList<Film> films;
     Context context;
+    RecyclerView recyclerView;
 
-    public SearchMovies(Context context,ArrayList<Film> films,String query)
+    public SearchMovies(Context context, ArrayList<Film> films, RecyclerView recyclerView, String query)
     {
         this.context= context;
         this.films = films;
+        this.recyclerView=recyclerView;
         this.query = query;
     }
 
@@ -101,6 +108,7 @@ public class SearchMovies extends AsyncTask {
                 film.setDescription(description);
                 films.add(film);
             }
+
         } catch (JSONException e) {
 
             Log.e("JSON Parser", "Error parsing data " + conn.toString());
@@ -115,6 +123,11 @@ public class SearchMovies extends AsyncTask {
     @Override
     protected void onPostExecute(Object o) {
         super.onPostExecute(o);
+        FilmRecyclerAdpater filmRecyclerAdpater = new FilmRecyclerAdpater(context,films);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(context,2);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setAdapter(filmRecyclerAdpater);
+
     }
 
     @Override

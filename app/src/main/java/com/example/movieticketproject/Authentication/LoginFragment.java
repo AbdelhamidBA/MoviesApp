@@ -97,7 +97,7 @@ public class LoginFragment extends Fragment {
                                     editor.commit();
                                     if(currentUser.getRole().equals("client"))
                                     {
-                                        Intent intent = new Intent(LoginFragment.this.getActivity(), ClientProfile.class);
+                                        Intent intent = new Intent(LoginFragment.this.getActivity(), HomeActivity.class);
                                         getActivity().startActivity(intent);
                                         getActivity().finishActivity(0);
                                     }

@@ -30,8 +30,13 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".AdminProfile"
+            android:name=".Profiles.AdminProfile"
             android:theme="@style/FullScreenTheme" />
+        <activity android:name=".Profiles.ClientProfile"/>
+        <activity android:name=".Profiles.AddRoom"/>
+        <activity android:name=".Profiles.AddFilm"/>
+        <activity android:name=".Profiles.AddSalle"/>
+        <activity android:name=".Profiles.Statistics"/>
         <activity android:name=".HomeActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
