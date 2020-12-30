@@ -45,7 +45,7 @@ public class AdminProfile extends AppCompatActivity {
         cv_adminprof2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminProfile.this, AddSalle.class);
+                Intent intent = new Intent(AdminProfile.this, AddCinema.class);
                 startActivity(intent);
             }
         });

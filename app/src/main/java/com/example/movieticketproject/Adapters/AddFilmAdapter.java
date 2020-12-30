@@ -1,17 +1,19 @@
 package com.example.movieticketproject.Adapters;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.movieticketproject.Models.Film;
+import com.example.movieticketproject.Profiles.FilmForm;
 import com.example.movieticketproject.R;
 import com.squareup.picasso.Picasso;
 
@@ -44,7 +46,10 @@ public class AddFilmAdapter extends RecyclerView.Adapter<AddFilmAdapter.ViewHold
         holder.addbutton_addfilm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //bach nab3thou intent feha el film
+
+                Intent intent = new Intent(context, FilmForm.class);
+                intent.putExtra("film",films.get(position));
+                context.startActivity(intent);
             }
         });
     }
@@ -60,9 +65,16 @@ public class AddFilmAdapter extends RecyclerView.Adapter<AddFilmAdapter.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            film_thumbnail_addfilm = itemView.findViewById(R.id.film_thumbnail);
-            film_thumbnail_addfilm.setColorFilter(Color.argb(1,0,0,0));
-            addbutton_addfilm = itemView.findViewById(R.id.infobutton);
+            film_thumbnail_addfilm = itemView.findViewById(R.id.film_thumbnail_addfilm);
+            addbutton_addfilm = itemView.findViewById(R.id.addbutton_addfilm);
+///////////
+            addbutton_addfilm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                }
+            });
         }
     }
 }

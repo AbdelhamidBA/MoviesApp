@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.movieticketproject.Adapters.FilmRecyclerAdpater;
+import com.example.movieticketproject.Decorators.CustomDecorator;
 import com.example.movieticketproject.Models.Film;
 import com.example.movieticketproject.R;
 import com.example.movieticketproject.Services.SearchMovies;
@@ -36,6 +37,9 @@ public class AddFilm extends AppCompatActivity {
         ic_back_addfilm = findViewById(R.id.ic_back_addfilm);
         tinp_searchfilm = findViewById(R.id.tinp_searchfilm);
         rv_listefilm_addfilm = findViewById(R.id.rv_listefilm_addfilm);
+        CustomDecorator marginDec = new CustomDecorator(25, 25, 25, 0);
+        rv_listefilm_addfilm.addItemDecoration(marginDec);
+        films = new ArrayList<>();
 
 
         ic_back_addfilm.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +47,7 @@ public class AddFilm extends AppCompatActivity {
             public void onClick(View v) {
 
             }
+
         });
 
         tinp_searchfilm.addTextChangedListener(new TextWatcher() {
@@ -53,7 +58,7 @@ public class AddFilm extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                SearchMovies searchMovies = new SearchMovies(context,  films, rv_listefilm_addfilm,s.toString());
+                SearchMovies searchMovies = new SearchMovies(AddFilm.this,  films, rv_listefilm_addfilm,s.toString());
                 searchMovies.execute();
             }
 

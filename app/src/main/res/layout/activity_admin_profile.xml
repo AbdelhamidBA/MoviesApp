@@ -131,7 +131,7 @@
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/roboto_light"
                     android:gravity="center"
-                    android:text="Add Salle"
+                    android:text="Add Cinema"
                     android:textColor="@color/gold"
                     android:textSize="18sp"
                     android:textStyle="bold"

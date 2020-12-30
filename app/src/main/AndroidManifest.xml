@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieTicketProject">
-        <activity android:name=".MovieDetails"></activity>
+        <activity android:name=".Profiles.FilmForm"></activity>
+        <activity android:name=".MovieDetails" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -31,19 +32,23 @@
 
         <activity
             android:name=".Profiles.AdminProfile"
-            android:theme="@style/FullScreenTheme" />
-        <activity android:name=".Profiles.ClientProfile"/>
-        <activity android:name=".Profiles.AddRoom"/>
-        <activity android:name=".Profiles.AddFilm"/>
-        <activity android:name=".Profiles.AddSalle"/>
-        <activity android:name=".Profiles.Statistics"/>
+            android:theme="@style/FullScreenTheme">
+
+        </activity>
+        <activity android:name=".Profiles.ClientProfile" />
+        <activity android:name=".Profiles.AddRoom" />
+        <activity android:name=".Profiles.AddFilm" />
+        <activity android:name=".Profiles.AddCinema" />
+        <activity android:name=".Profiles.Statistics" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <meta-data

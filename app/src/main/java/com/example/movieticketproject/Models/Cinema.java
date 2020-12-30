@@ -3,7 +3,7 @@ package com.example.movieticketproject.Models;
 import java.io.Serializable;
 
 public class Cinema implements Serializable {
-    private String id;
+    private String id; // Norme : ID : 100006
     private String name;
     private String address;
     private double latitude;

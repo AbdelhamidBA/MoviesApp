@@ -7,6 +7,7 @@ import android.util.Log;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.movieticketproject.Adapters.AddFilmAdapter;
 import com.example.movieticketproject.Adapters.FilmRecyclerAdpater;
 import com.example.movieticketproject.Models.Film;
 import com.example.movieticketproject.Profiles.AddFilm;
@@ -49,24 +50,26 @@ public class SearchMovies extends AsyncTask {
 
     @Override
     protected Object doInBackground(Object[] objects) {
-
+        System.out.println("a");
+        films = new ArrayList<>();
         String urltoquery = "search/movie?api_key="+Credentials.API_KEY+"&query="+query+"";
         URL url;
         HttpURLConnection conn = null;
         try{
 
-
+            System.out.println("b");
             url = new URL(Credentials.BASE_URL+urltoquery);
             conn = (HttpURLConnection)url.openConnection();
-
+            System.out.println("c");
             BufferedReader reader = null;
             try {
                 reader = new BufferedReader(new InputStreamReader(
                         conn.getInputStream(), "iso-8859-1"), 8);
-
+                System.out.println("d");
 
                 StringBuilder sb = new StringBuilder();
                 String line = null;
+                System.out.println("e");
                 while ((line = reader.readLine()) != null) {
                     sb.append(line + "\n");
                 }
@@ -91,6 +94,7 @@ public class SearchMovies extends AsyncTask {
         }
         try {
             jObj = new JSONObject(json);
+            System.out.println("f");
             JSONArray array = jObj.getJSONArray("results");
             for(int i=0;i<array.length();i++)
             {
@@ -123,10 +127,11 @@ public class SearchMovies extends AsyncTask {
     @Override
     protected void onPostExecute(Object o) {
         super.onPostExecute(o);
-        FilmRecyclerAdpater filmRecyclerAdpater = new FilmRecyclerAdpater(context,films);
+        AddFilmAdapter filmRecyclerAdpater = new AddFilmAdapter(context,films);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context,2);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(filmRecyclerAdpater);
+        System.out.println("rihab");
 
     }
 

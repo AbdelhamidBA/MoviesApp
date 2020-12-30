@@ -31,4 +31,9 @@ public class Room {
     public void setIdCinema(String idCinema) {
         this.idCinema = idCinema;
     }
+
+    @Override
+    public String toString() {
+        return getNumber();
+    }
 }

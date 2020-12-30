@@ -1,16 +1,107 @@
 package com.example.movieticketproject.Profiles;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.example.movieticketproject.Models.Cinema;
+import com.example.movieticketproject.Models.Film;
+import com.example.movieticketproject.Models.Room;
 import com.example.movieticketproject.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class AddRoom extends AppCompatActivity {
+
+    DatabaseReference reference = null;
+    Spinner Spinner_addroom;
+    Button btn_addroom;
+    ArrayList<Cinema> cinemas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_room);
+
+        Spinner_addroom = findViewById(R.id.Spinner_addroom);
+        btn_addroom = findViewById(R.id.btn_addroom);
+        reference = FirebaseDatabase.getInstance().getReference();
+        cinemas = new ArrayList<>();
+        showDataSpinner();
+    }
+
+    private void showDataSpinner() {
+        reference.child("Cinema").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //cinemas.clear();
+                for (DataSnapshot item: snapshot.getChildren()){
+                    cinemas.add(item.getValue(Cinema.class));
+                    System.out.println(cinemas);
+                }
+
+                ArrayAdapter<Cinema> cinemaArrayAdapter = new ArrayAdapter<>(AddRoom.this,R.layout.custom_spinner,cinemas);
+                Spinner_addroom.setAdapter(cinemaArrayAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        btn_addroom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Cinema cinema = (Cinema)Spinner_addroom.getSelectedItem();
+                Query query = reference.child("Room").orderByChild("idCinema").equalTo(cinema.getId());
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        long count = 0;
+                        if(snapshot.exists())
+                        {
+                            count = snapshot.getChildrenCount();
+                            String roomname = "R"+String.valueOf(count+1); // 10
+                            String id =cinema.getId()+roomname;
+                            Room room = new Room();
+                            room.setId(id);
+                            room.setNumber(roomname);
+                            room.setIdCinema(cinema.getId());
+                            reference.child("Room").push().setValue(room);
+                            Toast.makeText(AddRoom.this, "Room "+room.getNumber()+" Has Been Added to "+cinema.getName(), Toast.LENGTH_SHORT).show();
+                        }else
+                        {
+                            String roomname = "R"+String.valueOf(count+1); // 10
+                            String id =cinema.getId()+roomname;
+                            Room room = new Room();
+                            room.setId(id);
+                            room.setNumber(roomname);
+                            room.setIdCinema(cinema.getId());
+                            reference.child("Room").push().setValue(room);
+                            Toast.makeText(AddRoom.this, "Room "+room.getNumber()+" Has Been Added to "+cinema.getName(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
     }
 }
