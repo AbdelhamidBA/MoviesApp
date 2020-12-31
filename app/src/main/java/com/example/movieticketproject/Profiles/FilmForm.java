@@ -12,8 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.movieticketproject.Authentication.SignupFragment;
 import com.example.movieticketproject.Models.Cinema;
@@ -47,6 +49,7 @@ public class FilmForm extends AppCompatActivity {
     ArrayList<Cinema> cinemas;
     ArrayList<Room> room;
     Film film;
+    ImageView ic_back_filmform;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +66,15 @@ public class FilmForm extends AppCompatActivity {
         spin_cinema_addfilm = findViewById(R.id.spin_cinema_addfilm);
         btn_add_addfilm = findViewById(R.id.btn_add_addfilm);
         spin_room_addfilm = findViewById(R.id.spin_room_addfilm);
+        ic_back_filmform = findViewById(R.id.ic_back_filmform);
         reference = FirebaseDatabase.getInstance().getReference();
         cinemas = new ArrayList<>();
         room = new ArrayList<>();
+        Room r = new Room();
+        r.setNumber("Select a Room");
+        room.add(r);
+        ArrayAdapter<Room> roomArrayAdapter = new ArrayAdapter<>(FilmForm.this,R.layout.custom_spinner,room);
+        spin_room_addfilm.setAdapter(roomArrayAdapter);
         tmin = 00;
         theures =00;
         showDataSpinner();
@@ -73,6 +82,12 @@ public class FilmForm extends AppCompatActivity {
         ed_filmName_addfilm.setText(film.getName());
 
 
+        ic_back_filmform.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FilmForm.this.finish();
+            }
+        });
 
         ed_datepicker_addfilm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,21 +140,43 @@ public class FilmForm extends AppCompatActivity {
                 filmcinema = c.getId();
                 Room r = (Room) spin_room_addfilm.getSelectedItem();
                 filmroom = r.getId();
+                if(filmprice.equals(""))
+                {
+                    ed_filmprice_addfilm.setError("Enter a Price");
+                }
+                else if(filmdate.equals(""))
+                {
+                    ed_datepicker_addfilm.setError("Choose a show date");
+                }
+                else if(filmtime.equals(""))
+                {
+                    ed_timepicker_addfilm.setError("Choose a show time");
+                }
+                else if(spin_cinema_addfilm.getSelectedItemPosition() == 0)
+                {
+                    Toast.makeText(FilmForm.this, "Select Cinema", Toast.LENGTH_SHORT).show();
+                }
+                else if (spin_room_addfilm.getSelectedItemPosition() == 0)
+                {
+                    Toast.makeText(FilmForm.this, "Select Room", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    film.setPrice(filmprice);
+                    film.setShowdatetime(x);
+                    film.setIdCinema(filmcinema);
+                    film.setIdRoom(filmroom);
 
-                film.setPrice(filmprice);
-                film.setShowdatetime(x);
-                film.setIdCinema(filmcinema);
-                film.setIdRoom(filmroom);
+                    reference.child("Films").push().setValue(film);
 
-                reference.child("Films").push().setValue(film);
-
-                for (int i=0;i<=29;i++){
-                    Ticket ticket = new Ticket();
-                    String id = "T"+film.getId()+"R"+(i+1);
-                    ticket.setId(id);
-                    ticket.setIdFilm(film.getId());
-                    ticket.setSold(0);
-                    reference.child("Ticket").push().setValue(ticket);
+                    for (int i=0;i<=29;i++){
+                        Ticket ticket = new Ticket();
+                        String id = "T"+film.getId()+"R"+(i+1);
+                        ticket.setId(id);
+                        ticket.setIdFilm(film.getId());
+                        ticket.setSold(0);
+                        reference.child("Ticket").push().setValue(ticket);
+                    }
                 }
             }
         });
@@ -148,6 +185,9 @@ public class FilmForm extends AppCompatActivity {
     }
 
     private void showDataSpinner() {
+        Cinema x = new Cinema();
+        x.setName("Select Cinema");
+        cinemas.add(x);
        reference.child("Cinema").addValueEventListener(new ValueEventListener() {
            @Override
            public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -161,28 +201,36 @@ public class FilmForm extends AppCompatActivity {
                spin_cinema_addfilm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                    @Override
                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                       Cinema cinema = (Cinema)cinemas.get(position);
-                       Query query = reference.child("Room").orderByChild("idCinema").equalTo(cinema.getId());
-                       query.addValueEventListener(new ValueEventListener() {
-                           @Override
-                           public void onDataChange(@NonNull DataSnapshot snapshot) {
-                               if (snapshot.exists()){
-                                   for (DataSnapshot data : snapshot.getChildren()){
-                                       room.add(data.getValue(Room.class));
+                       if(position != 0)
+                       {
+                           Cinema cinema = (Cinema)cinemas.get(position);
+                           room  = new ArrayList<>();
+                           Room r = new Room();
+                           r.setNumber("Select a Room");
+                           room.add(r);
+                           Query query = reference.child("Room").orderByChild("idCinema").equalTo(cinema.getId());
+                           query.addValueEventListener(new ValueEventListener() {
+                               @Override
+                               public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                   if (snapshot.exists()){
+                                       for (DataSnapshot data : snapshot.getChildren()){
+                                           room.add(data.getValue(Room.class));
+                                       }
+                                       ArrayAdapter<Room> roomArrayAdapter = new ArrayAdapter<>(FilmForm.this,R.layout.custom_spinner,room);
+                                       spin_room_addfilm.setAdapter(roomArrayAdapter);
+                                   }else{
+                                       ArrayAdapter<Room> roomArrayAdapter = new ArrayAdapter<>(FilmForm.this,R.layout.custom_spinner,new ArrayList<>());
+                                       spin_room_addfilm.setAdapter(roomArrayAdapter);
                                    }
-                                   ArrayAdapter<Room> roomArrayAdapter = new ArrayAdapter<>(FilmForm.this,R.layout.custom_spinner,room);
-                                   spin_room_addfilm.setAdapter(roomArrayAdapter);
-                               }else{
-                                   ArrayAdapter<Room> roomArrayAdapter = new ArrayAdapter<>(FilmForm.this,R.layout.custom_spinner,new ArrayList<>());
-                                   spin_room_addfilm.setAdapter(roomArrayAdapter);
                                }
-                           }
 
-                           @Override
-                           public void onCancelled(@NonNull DatabaseError error) {
+                               @Override
+                               public void onCancelled(@NonNull DatabaseError error) {
 
-                           }
-                       });
+                               }
+                           });
+                       }
+
                    }
 
 

@@ -41,41 +41,53 @@
         android:id="@+id/constraintLayout3"
         android:layout_width="0dp"
         android:layout_height="400dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="28dp"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5">
 
+        <ImageView
+            android:id="@+id/iv_cinema_ic"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/room_pic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </ImageView>
+
         <Spinner
             android:id="@+id/Spinner_addroom"
-            android:layout_width="250dp"
+            android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="25dp"
             android:background="@drawable/customspinner"
             android:popupBackground="#20203E"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_cinema_ic" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_addroom"
-            android:layout_width="250dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="25dp"
             android:background="@drawable/customsimplebutton"
             android:fontFamily="@font/roboto_light"
             android:text="Confirm"
             android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/Spinner_addroom"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="@+id/Spinner_addroom"
             app:layout_constraintTop_toBottomOf="@+id/Spinner_addroom" />
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -45,7 +45,7 @@ public class AddFilm extends AppCompatActivity {
         ic_back_addfilm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                AddFilm.this.finish();
             }
 
         });

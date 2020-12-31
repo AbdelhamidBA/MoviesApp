@@ -28,7 +28,6 @@ import com.google.firebase.database.ValueEventListener;
 public class ProfileFragment extends Fragment {
     TextView tv_fullname_profile;
     EditText ed_fullName_profil,ed_email_profil,ed_birthdate_profil;
-    ImageView ic_back_clientprof;
     String fullname, birthdate,email;
     DatabaseReference reference = null;
     SharedPreferences pref;
@@ -43,7 +42,6 @@ public class ProfileFragment extends Fragment {
         ed_fullName_profil = v.findViewById(R.id.ed_fullName_profil);
         ed_email_profil = v.findViewById(R.id.ed_email_profil);
         ed_birthdate_profil = v.findViewById(R.id.ed_birthdate_profil);
-        ic_back_clientprof = v.findViewById(R.id.ic_back_clientprof);
         reference = FirebaseDatabase.getInstance().getReference().child("Users");
         pref = getActivity().getSharedPreferences("current_user", Context.MODE_PRIVATE);
 
@@ -68,16 +66,6 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-
-        ic_back_clientprof.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.setCustomAnimations(R.anim.enter_from_left,R.anim.exit_to_right);
-                fragmentTransaction.replace(R.id.mainfragement, MainActivity.splashScreen);
-                fragmentTransaction.commit();
             }
         });
 

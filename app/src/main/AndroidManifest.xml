@@ -35,7 +35,6 @@
             android:theme="@style/FullScreenTheme">
 
         </activity>
-        <activity android:name=".Profiles.ClientProfile" />
         <activity android:name=".Profiles.AddRoom" />
         <activity android:name=".Profiles.AddFilm" />
         <activity android:name=".Profiles.AddCinema" />

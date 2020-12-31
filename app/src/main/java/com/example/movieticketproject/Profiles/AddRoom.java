@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class AddRoom extends AppCompatActivity {
     Spinner Spinner_addroom;
     Button btn_addroom;
     ArrayList<Cinema> cinemas;
+    ImageView ic_back_addfilm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +39,23 @@ public class AddRoom extends AppCompatActivity {
 
         Spinner_addroom = findViewById(R.id.Spinner_addroom);
         btn_addroom = findViewById(R.id.btn_addroom);
+        ic_back_addfilm = findViewById(R.id.ic_back_addfilm);
         reference = FirebaseDatabase.getInstance().getReference();
         cinemas = new ArrayList<>();
         showDataSpinner();
+
+        ic_back_addfilm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddRoom.this.finish();
+            }
+        });
     }
 
     private void showDataSpinner() {
+        Cinema x = new Cinema();
+        x.setName("Select Cinema");
+        cinemas.add(x);
         reference.child("Cinema").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -65,7 +78,9 @@ public class AddRoom extends AppCompatActivity {
         btn_addroom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(Spinner_addroom.getSelectedItemPosition() != 0)
+                {
+                    btn_addroom.setEnabled(true);
                 Cinema cinema = (Cinema)Spinner_addroom.getSelectedItem();
                 Query query = reference.child("Room").orderByChild("idCinema").equalTo(cinema.getId());
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -101,6 +116,12 @@ public class AddRoom extends AppCompatActivity {
 
                     }
                 });
+
+                }
+                else
+                {
+                    btn_addroom.setEnabled(false);
+                }
             }
         });
     }

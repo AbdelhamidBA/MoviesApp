@@ -9,32 +9,22 @@
     android:backgroundTintMode="src_over"
     tools:context=".Profiles.ProfileFragment">
 
-    <ImageView
-        android:id="@+id/ic_back_clientprof"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/ic_arrowback"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto_light"
         android:gravity="center"
         android:text="My Profile"
-        android:fontFamily="@font/roboto_light"
         android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/ic_back_clientprof"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ic_back_clientprof"
+
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
     <com.makeramen.roundedimageview.RoundedImageView
@@ -73,28 +63,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageProfile" />
 
-    <ImageView
-        android:id="@+id/ic_pen_profile"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:src="@drawable/ic_pen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.228"
-        app:layout_constraintStart_toEndOf="@id/tv_fullname_profile"
-        app:layout_constraintTop_toTopOf="@+id/tv_fullname_profile"
-        app:tint="@color/gold" />
-
     <TextView
         android:id="@+id/tv_verif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto_light"
         android:gravity="center"
         android:text="Verified"
         android:textColor="@color/white"
-        android:fontFamily="@font/roboto_light"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.547"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_fullname_profile" />
 

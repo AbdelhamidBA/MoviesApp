@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.movieticketproject.Authentication.SignupFragment;
@@ -25,6 +26,7 @@ public class AddCinema extends AppCompatActivity {
     Button btn_addcinema;
     String name,addresse,longitude,latitude;
     DatabaseReference reference = null;
+    ImageView ic_back_addfilm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +39,15 @@ public class AddCinema extends AppCompatActivity {
         edad_addcin = findViewById(R.id.edadd_addcin);
         edname_addcin = findViewById(R.id.edname_addcin);
         btn_addcinema = findViewById(R.id.btn_addcinema);
+        ic_back_addfilm = findViewById(R.id.ic_back_addfilm);
         reference = FirebaseDatabase.getInstance().getReference().child("Cinema");
 
+        ic_back_addfilm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddCinema.this.finish();
+            }
+        });
 
         btn_addcinema.setOnClickListener(new View.OnClickListener() {
             @Override
