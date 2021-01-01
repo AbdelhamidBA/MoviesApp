@@ -44,4 +44,16 @@
     <style name="MyTextInputEditText" parent="ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox.Dense">
         <item name="android:textColor">@android:color/white</item>
     </style>
+
+
+    <style name="CCTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textColorHint">#AEAEAE</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="boxStrokeColor">@color/cc_textinput_text</item>
+    </style>
+
+    <style name="CCTextInputEditText" parent="ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox.Dense">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 </resources>

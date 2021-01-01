@@ -7,6 +7,7 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -46,10 +47,11 @@ public class MovieDetails extends AppCompatActivity {
     ImageView backButton,thumbnail;
     static ViewPager2 images;
     Button btn_buyticket;
-    String idMovie;
+    String idMovie="";
     Film RetFilm;
     MovieAPI movie;
     DatabaseReference reference = null;
+    DatabaseReference activation = null;
     static ArrayList<ImageModel> imageList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +81,52 @@ public class MovieDetails extends AppCompatActivity {
         images = findViewById(R.id.vp_images_details);
 
         btn_buyticket = findViewById(R.id.btn_buyticket_details);
+
+        activation = FirebaseDatabase.getInstance().getReference().child("Ticket");
+        Query query = activation.orderByChild("idFilm").equalTo(idMovie);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean available = false;
+                if(snapshot.exists())
+                {
+                    for(DataSnapshot data : snapshot.getChildren())
+                    {
+                        if(data.child("sold").getValue(int.class) == 0)
+                        {
+                            available = true;
+                            break;
+                        }
+                    }
+                    if(available == true)
+                    {
+                        btn_buyticket.setText("BUY TICKET");
+                        btn_buyticket.setEnabled(true);
+                    }
+                    else
+                    {
+                        btn_buyticket.setText("SOLD OUT");
+                        btn_buyticket.setEnabled(false);
+                    }
+                }
+                else
+                {
+                    btn_buyticket.setText("NOT AVAILABLE");
+                    btn_buyticket.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+
+
         movie = getMoviesDetails(idMovie);
 
 
@@ -110,6 +158,7 @@ public class MovieDetails extends AppCompatActivity {
         *
          */
 
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,7 +169,9 @@ public class MovieDetails extends AppCompatActivity {
         btn_buyticket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MovieDetails.this,CheckoutActivity.class);
+                intent.putExtra("idFilm",idMovie);
+                startActivity(intent);
             }
         });
     }
@@ -222,7 +273,8 @@ public class MovieDetails extends AppCompatActivity {
                                 movie.setPrice(film.getPrice());
                                 System.out.println("Movie:"+movie);
                                 String imgPath = "https://image.tmdb.org/t/p/original"+movie.getPoster_path();
-                                Picasso.with(MovieDetails.this).load(imgPath).into(thumbnail);
+                                Picasso.with(MovieDetails.this).load(imgPath).fit()
+                                        .centerCrop().into(thumbnail);
                                 //.with(MovieDetails.this).load(Credentials.IMAGE_BASE_URL+movie.getPoster_path()).into(thumbnail);
                                 TVName.setText(movie.getTitle());
                                 TVRelease.setText(movie.getReleaseDate());

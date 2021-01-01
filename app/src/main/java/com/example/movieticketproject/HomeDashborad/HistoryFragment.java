@@ -48,8 +48,8 @@ public class HistoryFragment extends Fragment {
         tickets = new ArrayList<>();
         pref = getActivity().getSharedPreferences("current_user", Context.MODE_PRIVATE);
         reference = FirebaseDatabase.getInstance().getReference().child("SoldTickets");
-        reference2 = FirebaseDatabase.getInstance().getReference().child("Tickets");
-        reference2 = FirebaseDatabase.getInstance().getReference().child("Films");
+        reference2 = FirebaseDatabase.getInstance().getReference().child("Ticket");
+        reference3 = FirebaseDatabase.getInstance().getReference().child("Films");
         Query query = reference.orderByChild("client").equalTo(pref.getString("email",""));
         query.addValueEventListener(new ValueEventListener() {
             @Override
@@ -60,6 +60,7 @@ public class HistoryFragment extends Fragment {
                     for(DataSnapshot data:snapshot.getChildren())
                     {
                         String idTicket =  data.child("idTicket").getValue(String.class);
+                        System.out.println("Ticket:"+idTicket);
                         Query query1 = reference2.orderByChild("id").equalTo(idTicket);
                         query1.addValueEventListener(new ValueEventListener() {
                             @Override
@@ -68,7 +69,8 @@ public class HistoryFragment extends Fragment {
                                 {
                                     DataSnapshot dataTicket = snapshot.getChildren().iterator().next();
                                     String idFilm = dataTicket.child("idFilm").getValue(String.class);
-                                    String seat = dataTicket.child("seat").getValue(String.class);
+                                    System.out.println("ID MOVIE:"+idFilm);
+                                    String seat = "A1";
                                     Query query2 = reference3.orderByChild("id").equalTo(idFilm);
                                     query2.addValueEventListener(new ValueEventListener() {
                                         @Override
@@ -81,7 +83,7 @@ public class HistoryFragment extends Fragment {
                                                 String[] datetime = date.trim().split(" ");
                                                 String showdate = datetime[0];
                                                 String showtime = datetime[1];
-                                                String room = dataFilm.child("room").getValue(String.class);
+                                                String room = dataFilm.child("idRoom").getValue(String.class);
                                                 String price = dataFilm.child("price").getValue(String.class)+"DT";
                                                 TicketData ticketData = new TicketData();
                                                 ticketData.setId(idTicket);
@@ -93,6 +95,11 @@ public class HistoryFragment extends Fragment {
                                                 ticketData.setTime(showtime);
                                                 ticketData.setSeat(seat);
                                                 tickets.add(ticketData);
+                                                TicketRecyclerAdpater recyclerAdpater = new TicketRecyclerAdpater(getActivity(),tickets);
+                                                CustomDecorator customDecorator = new CustomDecorator(15,0,0,0);
+                                                rv_TicketHistory.setLayoutManager(new GridLayoutManager(getActivity(), 1));
+                                                rv_TicketHistory.addItemDecoration(customDecorator);
+                                                rv_TicketHistory.setAdapter(recyclerAdpater);
                                             }
                                             else
                                             {
@@ -118,11 +125,16 @@ public class HistoryFragment extends Fragment {
                             }
                         });
                     }
+                    System.out.println(tickets.size());
+                    /*
                     TicketRecyclerAdpater recyclerAdpater = new TicketRecyclerAdpater(getActivity(),tickets);
                     CustomDecorator customDecorator = new CustomDecorator(15,0,0,0);
                     rv_TicketHistory.setLayoutManager(new GridLayoutManager(getActivity(), 1));
                     rv_TicketHistory.addItemDecoration(customDecorator);
                     rv_TicketHistory.setAdapter(recyclerAdpater);
+                    System.out.println("HERE2");
+
+                     */
                 }
                 else
                 {
